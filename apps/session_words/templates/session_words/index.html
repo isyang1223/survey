@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Session Words</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <div class=“container”>
+        <h1>Add a new word</h1>
+        <form action = "session_words/add" method="post">
+         {% csrf_token %}
+        <input type='text' name='add_word'>
+        <h2>Choose color</h2>
+        <input type="radio" name="color" value="red">Red
+        <br>
+        <input type="radio" name="color" value="green">Green
+        <br>
+        <input type="radio" name="color" value="blue">Blue
+
+        <h3>
+        <input id='bigfont' type="checkbox" name="font">
+        Show in BIG fonts!
+        </h3>
+        <input type="submit" value="Add to Session" class="btn btn-primary">
+        </form>
+
+        <form action="session_words/clear">
+         
+        <input type="submit" value="Clear Session" class="btn btn-primary">
+        </form>
+    
+        <div class=“form-group>
+        {% for i in request.session.feed %}
+        <p><span style="color: {{i.color}}; font-size: {{i.font}};">{{i.add_word}}</span> - added on {{i.time}}</p>
+        {% endfor %}
+            </div>
+    </div>
+    
+</body>
+</html>
